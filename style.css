@@ -2,16 +2,20 @@ html {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.button {
-    outline: 0.5px solid black;
+body {
+    display: flex;
+    justify-content: center;
 }
+
 
 #main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     outline: 0.5px black solid;
-    width: 500px;
+    width: 300px;
+    height: 600px;
+    /* justify-content: space-evenly; */
 }
 
 #controller {
@@ -20,12 +24,17 @@ html {
 }
 
 .button {
+    outline: 0.5px solid black;
     width: 35px;
     height: 35px;
     margin: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.button.big {
+    width: 80px;
 }
 
 .row {
@@ -36,5 +45,5 @@ html {
 #screen {
     height: 100px;
     outline: 0.5px black solid;
-    margin-bottom: 20px;
+    margin: 20px;
 }
