@@ -1,8 +1,9 @@
+const screen = document.querySelector('#screen');
+
 const buttons = Array.from(document.querySelectorAll('.button'));
-console.log(buttons);
+buttons.forEach(button => button.addEventListener('click', captureValue));
 
-buttons.forEach(button => button.addEventListener('click', printKey));
-
-function printKey(e) {
-    console.log(e.target);
+function captureValue(e) {
+    // console.log(e.target.innerText);
+    screen.textContent = e.target.innerText;
 }

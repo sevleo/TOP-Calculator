@@ -1,0 +1,50 @@
+there are 3 empty vars: left operand, operator, right operand
+
+if left operand is empty and user clicks on a number or the decimal point button:
+    add the number to the left operand
+    show the number on the screen
+    if the user clicks on the decimal point button, add "0."
+
+if left operand is not empty and user clicks on a number or the decimal point button:
+    add the number as the next digit to the left operand
+    update the number on the screen
+    if first digit was "0" and this character is not a decimal point, override "0".
+
+when the user clicks an operator button
+    add the operator next to the left operand
+    show the operator on the screen
+    if the user clicks on another operator button before enterign the right operand, override the operator and update the screen
+
+when the user clicks on a number or the decimal point after clicking an operand:
+    add the number to the right operand
+    show the number on the screen next to the operand
+    if the user clicks on the decimal point button, add "0."
+
+if the right operand is not empty and user clicks on a number or the decimal point button:
+    add the number as the next digit to the right operand
+    update the number on the screen
+    if first digit was "0" and this character is not a decimal point, override "0".
+
+if all three vars are populated and the user clicks "=":
+    perform the operation respective to the operand
+    show the result on the screen
+    store the result in the left operand value
+    erase operator and right operand
+
+if all three vars are populated and the user clicks an operator button:
+    perform the operation respective to the operand
+    shwo the result on the screen
+    store the result in the left operand value
+    erase the operator and the right operand
+    add the operand
+
+
+
+
+button clickability rules
+    if left operand is empty, do not allow to click on an operator button
+    if there is already a decimal point, do not allow to click the decimal point button
+    the equal button will be availble only after left operand, operator, and right operand are in place.
+
+
+
