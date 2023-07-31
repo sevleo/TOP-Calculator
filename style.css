@@ -1,0 +1,40 @@
+html {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.button {
+    outline: 0.5px solid black;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    outline: 0.5px black solid;
+    width: 500px;
+}
+
+#controller {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+#screen {
+    height: 100px;
+    outline: 0.5px black solid;
+    margin-bottom: 20px;
+}
