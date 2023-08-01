@@ -26,7 +26,7 @@ function captureValue(e) {
         rightOperand = formOperand(e, rightOperand);
     }
 
-    if (e.target.classList.contains('equal') && )
+    // if (e.target.classList.contains('equal') && )
 
     screen.textContent = `${leftOperand} ${operator} ${rightOperand}`;
     
