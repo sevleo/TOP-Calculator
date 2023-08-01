@@ -1,4 +1,5 @@
-const screen = document.querySelector('#screen');
+const expressionDiv = document.querySelector('#expression');
+const resultDiv = document.querySelector('#result');
 
 const buttons = Array.from(document.querySelectorAll('.button'));
 buttons.forEach(button => button.addEventListener('click', captureValue));
@@ -16,11 +17,19 @@ function captureValue(e) {
     }
 
     // Capture operator
-    if (e.target.classList.contains('operator') && leftOperand !== '' && rightOperand === '') {
-        if (leftOperand.endsWith(".")) {
-            leftOperand = leftOperand.slice(0, -1); // Remove decimal point if it is not followed by a digit
+    if (e.target.classList.contains('operator')) {
+        if (leftOperand !== '' && rightOperand === '') {
+            if (leftOperand.endsWith(".")) {
+                leftOperand = leftOperand.slice(0, -1); // Remove decimal point if it is not followed by a digit
+            }
+            operator = e.target.innerText;
         }
-        operator = e.target.innerText;
+        else if (leftOperand !== '' && rightOperand !=='') {
+            leftOperand = calculate(leftOperand, operator, rightOperand);
+            operator = e.target.innerText;
+            rightOperand = '';
+            overrideLeftOperand = true;
+        }
     }
 
     // Capture right operand
@@ -30,14 +39,35 @@ function captureValue(e) {
 
     // Calculate
     if (e.target.classList.contains('equal') && rightOperand !== '') {
-        leftOperand = calculate(leftOperand, operator, rightOperand);
-        operator = '';
-        rightOperand = '';
+        resultDiv.textContent = calculate(leftOperand, operator, rightOperand);
+        // operator = '';
+        // rightOperand = '';
         overrideLeftOperand = true;
     }
 
-    screen.textContent = `${leftOperand} ${operator} ${rightOperand}`;
-    
+    // Execute clear
+    if (e.target.dataset.key === 'keyClear') {
+        leftOperand = '0';
+        operator = '';
+        rightOperand = '';
+    }
+
+    // Execute delete
+    if (e.target.dataset.key === 'keyDelete') {
+        if (rightOperand === '' && operator === '') {
+            leftOperand = leftOperand.slice(0, -1);
+        }
+        
+        else if (rightOperand === '') {
+            operator = '';
+        }
+
+        else {
+            rightOperand = rightOperand.slice(0, -1);
+        }
+    }
+
+    expressionDiv.textContent = `${leftOperand} ${operator} ${rightOperand}`;
 }
 
 function formOperand(e, operand, overrideLeftOperand) {
@@ -66,12 +96,12 @@ function calculate(leftOperand, operator, rightOperand) {
     const rightNumber = Number(rightOperand);
     switch (operator) {
         case '+':
-            return (leftNumber + rightNumber).toFixed(2).toString();
+            return parseFloat((leftNumber + rightNumber).toFixed(2)).toString();
         case '-':
-            return (leftNumber - rightNumber).toFixed(2).toString();
+            return parseFloat((leftNumber - rightNumber).toFixed(2)).toString();
         case '*':
-            return (leftNumber * rightNumber).toFixed(2).toString();
+            return parseFloat((leftNumber * rightNumber).toFixed(2)).toString();
         case '/':
-            return (leftNumber / rightNumber).toFixed(2).toString();
+            return parseFloat((leftNumber / rightNumber).toFixed(2)).toString();
     }
 }
