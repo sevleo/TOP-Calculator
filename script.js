@@ -8,37 +8,28 @@ let operator = '';
 let rightOperand = '';
 
 function captureValue(e) {
+    // Capture left operand
     if (e.target.classList.contains('operand') && operator === '') {
-        if (leftOperand === '') {
+        if (leftOperand === '' || leftOperand === '0') {
             if (e.target.classList.contains('dot')) {
-                leftOperand = '0.';
+                leftOperand = '0.'; // To ensure zero goes before decimal if user enters decimal
             }
             else {
-                leftOperand = e.target.innerText;
+                leftOperand = e.target.innerText; // To ensure only one zero in a number
             }
         }
         else {
-            if (leftOperand === '0') {
-                if (e.target.classList.contains('dot')) {
-                    leftOperand = '0.';
-                }
-                else {
-                    leftOperand = e.target.innerText;
-                }
+            if (leftOperand.includes('.') && e.target.classList.contains('dot')) {
+                leftOperand = leftOperand; // To ensure only one decimal
             }
-    
             else {
-                if (leftOperand.includes('.') && e.target.classList.contains('dot')) {
-                    leftOperand = leftOperand;
-                }
-                else {
-                    leftOperand += e.target.innerText;
-                }
-            }
+                leftOperand += e.target.innerText; // To cover cases in which entered value is not a decimal or a zero
+            } 
         }
     }
 
-    if (e.target.classList.contains('operator')) {
+    // Capture operator
+    if (e.target.classList.contains('operator') && leftOperand !== '') {
         operator = e.target.innerText;
     }
 
