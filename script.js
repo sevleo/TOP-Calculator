@@ -26,7 +26,11 @@ function captureValue(e) {
         rightOperand = formOperand(e, rightOperand);
     }
 
-    // if (e.target.classList.contains('equal') && )
+    if (e.target.classList.contains('equal') && rightOperand !== '') {
+        leftOperand = performCalculus(leftOperand, operator, rightOperand);
+        operator = '';
+        rightOperand = '';
+    }
 
     screen.textContent = `${leftOperand} ${operator} ${rightOperand}`;
     
@@ -50,4 +54,19 @@ function formOperand(e, operand) {
         } 
     }
     return operand;
+}
+
+function performCalculus(leftOperand, operator, rightOperand) {
+    const leftNumber = Number(leftOperand);
+    const rightNumber = Number(rightOperand);
+    switch (operator) {
+        case '+':
+            return (leftNumber + rightNumber).toFixed(2).toString();
+        case '-':
+            return (leftNumber - rightNumber).toFixed(2).toString();
+        case '*':
+            return (leftNumber * rightNumber).toFixed(2).toString();
+        case '/':
+            return (leftNumber / rightNumber).toFixed(2).toString();
+    }
 }
