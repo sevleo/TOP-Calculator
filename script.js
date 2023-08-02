@@ -70,19 +70,15 @@ function captureValue(e) {
 
     // Execute delete
     if (e.target.dataset.key === 'keyDelete') {
-        if (rightOperand !== '') {
+        if (resultDiv.textContent !== '0') {
             result = result.slice(0, -1);
             rightOperand = result;
             resultDiv.textContent = result;
         }
-        else {
-            result = result.slice(0, -1);
-            resultDiv.textContent = result;
-            rightOperand = result;
-        }
+
     }
 
-    // console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
+    console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
 }
 
 function formOperand(e, operand, overrideLeftOperand) {
