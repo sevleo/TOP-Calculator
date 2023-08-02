@@ -97,21 +97,21 @@ function calculate(leftOperand, operator, rightOperand) {
 }
 
 function captureLeftOperand(e, keyboardEntry = false) {
-        leftOperand = formOperand(e, resultDiv.textContent, overrideLeftOperand, keyboardEntry);
-        // leftOperand += e;
-    
+    leftOperand = formOperand(e, resultDiv.textContent, overrideLeftOperand, keyboardEntry);
     result = leftOperand;
     resultDiv.textContent = leftOperand;
     overrideLeftOperand = false;
 }
 
 function captureOperator(e) {
-    if (resultDiv.textContent !== '' && rightOperand === '') {
+    if (resultDiv.textContent !== '0' && rightOperand === '') {
         if (leftOperand.endsWith(".")) {
             leftOperand = leftOperand.slice(0, -1); // Remove decimal point if it is not followed by a digit
             result = leftOperand;
         }
         operator = e.target.innerText;
+        expressionDiv.textContent = `${leftOperand} ${operator}`;
+        resultDiv.textContent = result;
     }
     else if (resultDiv.textContent !== '' && rightOperand !=='') {
         result = calculate(leftOperand, operator, rightOperand);
@@ -119,9 +119,10 @@ function captureOperator(e) {
         leftOperand = result;
         overrideLeftOperand = true;
         rightOperand = '';
+        expressionDiv.textContent = `${leftOperand} ${operator}`;
+        resultDiv.textContent = result;
     }
-    expressionDiv.textContent = `${leftOperand} ${operator}`;
-    resultDiv.textContent = result;
+
 }
 
 function captureRightOperand(e) {
