@@ -1,84 +1,44 @@
 const expressionDiv = document.querySelector('#expression');
 const resultDiv = document.querySelector('#result');
 
-const buttons = Array.from(document.querySelectorAll('.button'));
-buttons.forEach(button => button.addEventListener('click', captureValue));
-
 let leftOperand = '';
 let operator = '';
 let rightOperand = '';
 let result = '';
 let overrideLeftOperand = false;
 
-function captureValue(e) {
-    // Capture left operand
+const buttons = Array.from(document.querySelectorAll('.button'));
+buttons.forEach(button => button.addEventListener('click', captureValueOnScreen));
+// window.addEventListener("keydown", handleKeyboardInput);
+
+
+
+function captureValueOnScreen(e) {
     if (e.target.classList.contains('operand') && operator === '') {
-        leftOperand = formOperand(e, resultDiv.textContent, overrideLeftOperand);
-        result = leftOperand;
-        resultDiv.textContent = leftOperand;
-        overrideLeftOperand = false;
+        captureLeftOperand(e);
     }
 
-    // Capture operator
     if (e.target.classList.contains('operator')) {
-        if (resultDiv.textContent !== '' && rightOperand === '') {
-            if (leftOperand.endsWith(".")) {
-                leftOperand = leftOperand.slice(0, -1); // Remove decimal point if it is not followed by a digit
-                result = leftOperand;
-            }
-            operator = e.target.innerText;
-        }
-        else if (resultDiv.textContent !== '' && rightOperand !=='') {
-            result = calculate(leftOperand, operator, rightOperand);
-            operator = e.target.innerText;
-            leftOperand = result;
-            overrideLeftOperand = true;
-            rightOperand = '';
-        }
-        expressionDiv.textContent = `${leftOperand} ${operator}`;
-        resultDiv.textContent = result;
-        // rightOperand = '';
+        captureOperator(e);
     }
 
-    // Capture right operand
     if (e.target.classList.contains('operand') && operator !== '' ) {
-        rightOperand = formOperand(e, rightOperand);
-        result = rightOperand;
-        resultDiv.textContent = result;
+        captureRightOperand(e);
     }
 
-    // Calculate
     if (e.target.classList.contains('equal') && rightOperand !== '') {
-
-        result = calculate(leftOperand, operator, rightOperand);
-        resultDiv.textContent = result;
-        overrideLeftOperand = true;
-        expressionDiv.textContent = `${leftOperand} ${operator} ${rightOperand} =`;
-        rightOperand = '';
-        leftOperand = result;
+        captureEqual(e);
     }
 
-    // Execute clear
     if (e.target.dataset.key === 'keyClear') {
-        leftOperand = '0';
-        operator = '';
-        rightOperand = '';
-        result = '';
-        expressionDiv.textContent = '';
-        resultDiv.textContent = '0';
+        executeClear(e);
     }
 
-    // Execute delete
     if (e.target.dataset.key === 'keyDelete') {
-        if (resultDiv.textContent !== '0') {
-            result = result.slice(0, -1);
-            rightOperand = result;
-            resultDiv.textContent = result;
-        }
-
+        executeDelete(e);
     }
 
-    console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
+    // console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
 }
 
 function formOperand(e, operand, overrideLeftOperand) {
@@ -116,3 +76,77 @@ function calculate(leftOperand, operator, rightOperand) {
             return parseFloat((leftNumber / rightNumber).toFixed(2)).toString();
     }
 }
+
+function captureLeftOperand(e) {
+    leftOperand = formOperand(e, resultDiv.textContent, overrideLeftOperand);
+    result = leftOperand;
+    resultDiv.textContent = leftOperand;
+    overrideLeftOperand = false;
+}
+
+function captureOperator(e) {
+    if (resultDiv.textContent !== '' && rightOperand === '') {
+        if (leftOperand.endsWith(".")) {
+            leftOperand = leftOperand.slice(0, -1); // Remove decimal point if it is not followed by a digit
+            result = leftOperand;
+        }
+        operator = e.target.innerText;
+    }
+    else if (resultDiv.textContent !== '' && rightOperand !=='') {
+        result = calculate(leftOperand, operator, rightOperand);
+        operator = e.target.innerText;
+        leftOperand = result;
+        overrideLeftOperand = true;
+        rightOperand = '';
+    }
+    expressionDiv.textContent = `${leftOperand} ${operator}`;
+    resultDiv.textContent = result;
+}
+
+function captureRightOperand(e) {
+    rightOperand = formOperand(e, rightOperand);
+    result = rightOperand;
+    resultDiv.textContent = result;
+}
+
+function captureEqual(e) {
+    result = calculate(leftOperand, operator, rightOperand);
+    resultDiv.textContent = result;
+    overrideLeftOperand = true;
+    expressionDiv.textContent = `${leftOperand} ${operator} ${rightOperand} =`;
+    rightOperand = '';
+    leftOperand = result;
+}
+
+function executeClear(e) {
+    leftOperand = '0';
+    operator = '';
+    rightOperand = '';
+    result = '';
+    expressionDiv.textContent = '';
+    resultDiv.textContent = '0';
+}
+
+function executeDelete(e) {
+    if (resultDiv.textContent !== '0') {
+        result = result.slice(0, -1);
+        rightOperand = result;
+        resultDiv.textContent = result;
+    }
+
+}
+
+
+
+
+
+
+// function handleKeyboardInput(e) {
+//     if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
+//     if (e.key === '.') appendPoint();
+//     if (e.key === '=' || e.key === 'Enter') evaluate();
+//     if (e.key === 'Backspace') deleteNumber();
+//     if (e.key === 'Escape') clear();
+//     if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/');
+//       setOperation(convertOperator(e.key));
+// }
