@@ -4,45 +4,58 @@ const resultDiv = document.querySelector('#result');
 const buttons = Array.from(document.querySelectorAll('.button'));
 buttons.forEach(button => button.addEventListener('click', captureValue));
 
-let leftOperand = '0';
+let leftOperand = '';
 let operator = '';
 let rightOperand = '';
+let result = '';
 let overrideLeftOperand = false;
 
 function captureValue(e) {
     // Capture left operand
     if (e.target.classList.contains('operand') && operator === '') {
-        leftOperand = formOperand(e, leftOperand, overrideLeftOperand);
+        leftOperand = formOperand(e, resultDiv.textContent, overrideLeftOperand);
+        result = leftOperand;
+        resultDiv.textContent = leftOperand;
         overrideLeftOperand = false;
     }
 
     // Capture operator
     if (e.target.classList.contains('operator')) {
-        if (leftOperand !== '' && rightOperand === '') {
+        if (resultDiv.textContent !== '' && rightOperand === '') {
             if (leftOperand.endsWith(".")) {
                 leftOperand = leftOperand.slice(0, -1); // Remove decimal point if it is not followed by a digit
+                result = leftOperand;
             }
             operator = e.target.innerText;
         }
-        else if (leftOperand !== '' && rightOperand !=='') {
-            leftOperand = calculate(leftOperand, operator, rightOperand);
+        else if (resultDiv.textContent !== '' && rightOperand !=='') {
+            result = calculate(leftOperand, operator, rightOperand);
             operator = e.target.innerText;
-            rightOperand = '';
+            leftOperand = result;
             overrideLeftOperand = true;
+            rightOperand = '';
         }
+        expressionDiv.textContent = `${leftOperand} ${operator}`;
+        resultDiv.textContent = result;
+        // rightOperand = '';
     }
 
     // Capture right operand
     if (e.target.classList.contains('operand') && operator !== '' ) {
         rightOperand = formOperand(e, rightOperand);
+        result = rightOperand;
+        resultDiv.textContent = result;
     }
 
     // Calculate
     if (e.target.classList.contains('equal') && rightOperand !== '') {
-        resultDiv.textContent = calculate(leftOperand, operator, rightOperand);
-        // operator = '';
-        // rightOperand = '';
+
+        result = calculate(leftOperand, operator, rightOperand);
+        resultDiv.textContent = result;
         overrideLeftOperand = true;
+        expressionDiv.textContent = `${leftOperand} ${operator} ${rightOperand} =`;
+        rightOperand = '';
+        leftOperand = result;
     }
 
     // Execute clear
@@ -50,24 +63,25 @@ function captureValue(e) {
         leftOperand = '0';
         operator = '';
         rightOperand = '';
+        expressionDiv.textContent = '';
+        resultDiv.textContent = '0';
     }
 
     // Execute delete
     if (e.target.dataset.key === 'keyDelete') {
-        if (rightOperand === '' && operator === '') {
-            leftOperand = leftOperand.slice(0, -1);
+        if (rightOperand !== '') {
+            result = result.slice(0, -1);
+            rightOperand = result;
+            resultDiv.textContent = result;
         }
-        
-        else if (rightOperand === '') {
-            operator = '';
-        }
-
         else {
-            rightOperand = rightOperand.slice(0, -1);
+            result = result.slice(0, -1);
+            resultDiv.textContent = result;
+            rightOperand = result;
         }
     }
 
-    expressionDiv.textContent = `${leftOperand} ${operator} ${rightOperand}`;
+    console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
 }
 
 function formOperand(e, operand, overrideLeftOperand) {

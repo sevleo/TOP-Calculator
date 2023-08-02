@@ -47,4 +47,26 @@ body {
     width: 250px;
     outline: 0.5px black solid;
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#screen > div {
+    height: 18.5px;
+  }
+
+#expression {
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+#result {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 10px;
 }
