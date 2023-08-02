@@ -156,6 +156,8 @@ a {
     margin-bottom: -12px;
     margin-left: 10px;
     transition: transform 0.3s ease-in-out;
+    border-radius: 50%;
+    outline: black solid;
 }
 
 #gh-logo:hover {
