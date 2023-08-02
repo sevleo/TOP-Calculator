@@ -9,7 +9,7 @@ let overrideLeftOperand = false;
 
 const buttons = Array.from(document.querySelectorAll('.button'));
 buttons.forEach(button => button.addEventListener('click', captureValueOnScreen));
-// window.addEventListener("keydown", handleKeyboardInput);
+window.addEventListener("keydown", handleKeyboardInput);
 
 
 
@@ -38,26 +38,45 @@ function captureValueOnScreen(e) {
         executeDelete(e);
     }
 
-    // console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
+    console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
 }
 
-function formOperand(e, operand, overrideLeftOperand) {
+function formOperand(e, operand, overrideLeftOperand, keyboardEntry) {
     if (operand === '' || operand === '0' || overrideLeftOperand === true) {
-        if (e.target.classList.contains('dot')) {
-            operand = '0.'; // To ensure zero goes before decimal if user enters decimal
+        if (keyboardEntry === false) {
+            if (e.target.classList.contains('dot')) {
+                operand = '0.'; // To ensure zero goes before decimal if user enters decimal
+            }
+            else {
+                operand = e.target.innerText; // To ensure only one zero in a number
+            }
         }
-        else {
-            operand = e.target.innerText; // To ensure only one zero in a number
+        else if (keyboardEntry === true) {
+            if (e === '.') {
+                operand = '0.'; // To ensure zero goes before decimal if user enters decimal
+            }
+            else {
+                operand = e; // To ensure only one zero in a number
+            }
         }
-        
     }
     else {
-        if (operand.includes('.') && e.target.classList.contains('dot')) {
-            operand = operand; // To ensure only one decimal
+        if (keyboardEntry === false) {
+            if (operand.includes('.') && e.target.classList.contains('dot')) {
+                operand = operand; // To ensure only one decimal
+            }
+            else {
+                operand += e.target.innerText; // To cover cases in which entered value is not a decimal or a zero
+            } 
         }
-        else {
-            operand += e.target.innerText; // To cover cases in which entered value is not a decimal or a zero
-        } 
+        else if (keyboardEntry === true) {
+            if (operand.includes('.') && e === '.') {
+                operand = operand; // To ensure only one decimal
+            }
+            else {
+                operand += e; // To cover cases in which entered value is not a decimal or a zero
+            } 
+        }
     }
     return operand;
 }
@@ -77,8 +96,10 @@ function calculate(leftOperand, operator, rightOperand) {
     }
 }
 
-function captureLeftOperand(e) {
-    leftOperand = formOperand(e, resultDiv.textContent, overrideLeftOperand);
+function captureLeftOperand(e, keyboardEntry = false) {
+        leftOperand = formOperand(e, resultDiv.textContent, overrideLeftOperand, keyboardEntry);
+        // leftOperand += e;
+    
     result = leftOperand;
     resultDiv.textContent = leftOperand;
     overrideLeftOperand = false;
@@ -137,16 +158,14 @@ function executeDelete(e) {
 }
 
 
-
-
-
-
-// function handleKeyboardInput(e) {
-//     if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
-//     if (e.key === '.') appendPoint();
-//     if (e.key === '=' || e.key === 'Enter') evaluate();
-//     if (e.key === 'Backspace') deleteNumber();
-//     if (e.key === 'Escape') clear();
-//     if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/');
-//       setOperation(convertOperator(e.key));
-// }
+function handleKeyboardInput(e) {
+    if (((e.key >= 0 & e.key <= 9) || e.key === '.') && operator === '') {
+        captureLeftOperand(e.key, keyboardEntry = true);
+    }
+    // if (e.key === '.') appendPoint();
+    if (e.key === '=' || e.key === 'Enter') evaluate();
+    if (e.key === 'Backspace') deleteNumber();
+    if (e.key === 'Escape') clear();
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/');
+    //   setOperation(convertOperator(e.key));
+}
