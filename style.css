@@ -21,18 +21,21 @@
 html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: rgba(203, 194, 213, 0.421);
+    min-height: 100%;
 }
 
 *, body {
-    padding: 0;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100%;
 }
 
 
@@ -141,3 +144,40 @@ div[data-key="keyDelete"]:active {
     margin-left: auto;
     margin-right: 10px;
 }
+
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+#gh-logo {
+    width: 35px;
+    height: 35px;
+    margin-bottom: -12px;
+    margin-left: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#gh-logo:hover {
+    transform: rotate(360deg) scale(1.2);
+  }
+
+.footer {
+    margin-top: auto;
+    font-size: 14px;
+    bottom: 0;
+    justify-content: center;
+    padding-top: 50px;
+    margin-bottom: 15px;
+    align-self: center;
+    align-content: center;
+    position: fixed;
+}
+
+.fa-github {
+    color: var(--font);
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+ 
