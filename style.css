@@ -1,10 +1,38 @@
+:root {
+    --button-hover: #ddd;
+    --button-active: #ccc;
+    --background-main-container: rgb(214, 214, 214);
+    --outline-main-container: 2px rgb(47, 47, 47) solid;
+    --box-shadow-main-container: 0px 0px 20px 2px rgba(0,0,0,0.5);
+    --box-shadow-button: 0px 0px 2px 1px rgba(0,0,0,0.5) inset;
+    --outline-button: 0.5px solid black;
+    --outline-screen: 1px rgb(47, 47, 47) solid;
+    --background-screen:  rgb(238, 238, 238);
+    --box-shadow-screen: 0px 0px 2px 1px rgba(0,0,0,0.5) inset;
+    --button-background: rgba(232, 232, 232);
+    --button-red: #faa;
+    --button-red-hover: #e99;
+    --button-red-active: #d88;
+    --button-blue: #aaf;
+    --button-blue-hover: #99e;
+    --button-blue-active: #88d;
+  }
+
 html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgba(203, 194, 213, 0.421);
+}
+
+*, body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 body {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 
@@ -12,12 +40,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    outline: 2px rgb(47, 47, 47) solid;
+    outline: var(--outline-main-container);
     border-radius: 10px;
     width: 300px;
     height: 500px;
-    margin-top: 20px;
-    background-color: rgba(185, 185, 185, 0.52);
+    margin-top: 100px;
+    background-color: var(--background-main-container);
+    box-shadow: var(--box-shadow-main-container);
 }
 
 #controller {
@@ -26,7 +55,7 @@ body {
 }
 
 .button {
-    outline: 0.5px solid black;
+    outline: var(--outline-button);
     width: 55px;
     height: 55px;
     margin: 5px;
@@ -34,11 +63,47 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 2.5px;
+    box-shadow: var(--box-shadow-button);
+    background-color: var(--button-background);
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--button-hover);
+  }
+
+.button:active {
+    background-color: var(--button-active);
 }
 
 .button.big {
     width: 120px;
 }
+
+div[data-key="keyClear"] {
+    background-color: var(--button-red);
+}
+
+div[data-key="keyClear"]:hover {
+    background-color: var(--button-red-hover);
+}
+
+div[data-key="keyClear"]:active {
+    background-color: var(--button-red-active);
+}
+
+div[data-key="keyDelete"] {
+    background-color: var(--button-blue);
+}
+
+div[data-key="keyDelete"]:hover {
+    background-color: var(--button-blue-hover);
+}
+
+div[data-key="keyDelete"]:active {
+    background-color: var(--button-blue-active);
+}
+
 
 .row {
     display: flex;
@@ -48,14 +113,15 @@ body {
 #screen {
     height: 100px;
     width: 250px;
-    outline: 1px rgb(47, 47, 47) solid;
+    outline: var(--outline-screen);
     border-radius: 5px;
     margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(238, 238, 238);
+    background-color: var(--background-screen);
+    box-shadow: var(--box-shadow-screen);
 }
 
 #screen > div {
