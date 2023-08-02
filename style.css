@@ -1,5 +1,5 @@
 html {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
@@ -12,10 +12,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    outline: 0.5px black solid;
+    outline: 2px rgb(47, 47, 47) solid;
+    border-radius: 10px;
     width: 300px;
-    height: 600px;
-    /* justify-content: space-evenly; */
+    height: 500px;
+    margin-top: 20px;
+    background-color: rgba(185, 185, 185, 0.52);
 }
 
 #controller {
@@ -25,16 +27,17 @@ body {
 
 .button {
     outline: 0.5px solid black;
-    width: 35px;
-    height: 35px;
+    width: 55px;
+    height: 55px;
     margin: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 2.5px;
 }
 
 .button.big {
-    width: 80px;
+    width: 120px;
 }
 
 .row {
@@ -45,12 +48,14 @@ body {
 #screen {
     height: 100px;
     width: 250px;
-    outline: 0.5px black solid;
+    outline: 1px rgb(47, 47, 47) solid;
+    border-radius: 5px;
     margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgb(238, 238, 238);
 }
 
 #screen > div {
@@ -65,7 +70,7 @@ body {
 }
 
 #result {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     margin-left: auto;
     margin-right: 10px;

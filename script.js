@@ -63,6 +63,7 @@ function captureValue(e) {
         leftOperand = '0';
         operator = '';
         rightOperand = '';
+        result = '';
         expressionDiv.textContent = '';
         resultDiv.textContent = '0';
     }
@@ -81,7 +82,7 @@ function captureValue(e) {
         }
     }
 
-    console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
+    // console.log(`Left operand ${leftOperand} \nOperator ${operator} \nRight operand ${rightOperand} \nResult ${result}`);
 }
 
 function formOperand(e, operand, overrideLeftOperand) {
