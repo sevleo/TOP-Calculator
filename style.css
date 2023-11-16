@@ -155,7 +155,7 @@ a {
     height: 35px;
     margin-bottom: -12px;
     margin-left: 10px;
-    transition: transform 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     border-radius: 50%;
     outline: black solid;
 }
@@ -176,10 +176,10 @@ a {
     position: fixed;
 }
 
-.fa-github {
+/* .fa-github {
     color: var(--font);
     font-size: 24px;
     transition: transform 0.3s ease-in-out;
   }
-  
+   */
  
