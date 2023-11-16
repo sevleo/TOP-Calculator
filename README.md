@@ -1,7 +1,7 @@
 
-# Etch-a-Sketch
+# Calculator
 
-The project provides a canvas with a grid for drawing stuff.
+JavaScript mplementation of calculator supporting basic operations: addition, subtraction, division, and multiplication. Supports decimals and negatives.
 
 
 ![Home page screenshot](demo.png)
@@ -18,14 +18,7 @@ The project provides a canvas with a grid for drawing stuff.
 
 ## Demo
 
-You can view the project at [Etch-a-Sketch Demo](https://sevleo.github.io/Etch-a-Sketch/).
-
-
-## How to use
-Select the color and hover over the grid layout. The cells you hover will change the color to that which you have selected.
-
-Default size of the grid is 16x16, but you can change that to any range between 1x1 and 100x100.
-
+You can view the project at [Calculator Demo](https://sevleo.github.io/calculator/).
 
 
 ## Technologies
