@@ -12,7 +12,6 @@ JavaScript mplementation of calculator supporting basic operations: addition, su
 ## Table of Contents
 
 - [Demo](#demo)
-- [How to use](#how-to-use)
 - [Technologies](#technologies)
 - [Contributing](#contributing)
 - [License](#license)
