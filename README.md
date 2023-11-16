@@ -13,7 +13,7 @@ JavaScript mplementation of calculator supporting basic operations: addition, su
 
 - [Demo](#demo)
 - [How to use](#how-to-use)
-- [Technologies used](#technologies)
+- [Technologies](#technologies)
 - [Contributing](#contributing)
 - [License](#license)
 
