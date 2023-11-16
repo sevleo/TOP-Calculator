@@ -1,7 +1,9 @@
 
 # Calculator
 
-JavaScript mplementation of calculator supporting basic operations: addition, subtraction, division, and multiplication. Supports decimals and negatives.
+JavaScript mplementation of calculator supporting basic operations: addition, subtraction, division, and multiplication. 
+- Supports decimals and negatives
+- Supports keyboard entry
 
 
 ![Home page screenshot](demo.png)
